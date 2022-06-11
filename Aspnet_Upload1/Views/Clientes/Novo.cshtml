@@ -1,0 +1,70 @@
+﻿@model  Aspnet_Upload1.Models.ClienteViewModel
+@{
+    ViewData["Title"] = "Novo";
+}
+
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-white">
+            <h4>Incluir Novo Cliente </h4>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" asp-action="Novo">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label asp-for="Nome" class="control-label"></label>
+                            <input asp-for="Nome" class="form-control" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label asp-for="Idade" class="control-label"></label>
+                            <input asp-for="Idade" class="form-control" />
+                            <span asp-validation-for="Idade" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label asp-for="Foto" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="Foto" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Escolha a imagem</label>
+                            </div>
+                            <span asp-validation-for="Foto" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submeter" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                    <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase">
+                    <i class="fas fa-fast-backward"></i> Retornar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        // incluir o codigo abaixo se desejar que o nome do arquivo apareça no select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

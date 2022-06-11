@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Aspnet_Upload1.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4 class="text-center text-uppercase">Lista de Clientes</h4>
+
+
+<p>
+    <a asp-action="Novo" class="btn btn-sm btn-primary rounded-0 text-uppercase">
+    <i class="fas fa-plus-circle"></i> Novo Cliente</a>
+
+<!--Caixa de busca-->
+    <form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Busca por nome ou email: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Pesquisar" class="btn btn-outline-info" /> |
+            <a asp-action="Index">Voltar à lista</a>
+        </p>
+    </div>
+</form>
+
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <!--Link ordenar os campos https://docs.microsoft.com/pt-br/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0-->
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NomeSortParm"]">@Html.DisplayNameFor(model => model.Nome)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idade)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["EmailSortParm"]">@Html.DisplayNameFor(model => model.Email)</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @if (@item.Foto != null || @item.Foto == "")                
+                {
+                    <img src="~/Imagens/@item.Foto" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+                    @item.Nome
+                }
+                else
+                {
+                    <img src="~/Imagens/default.jpg" class="rounded-circle" height="150" width="150" asp-append-version="true" />
+                    @item.Nome
+                }
+            </td>
+            <td>@item.Idade</td>
+            <td>@item.Email</td>
+        </tr>
+        }
+    </tbody>
+</table>
