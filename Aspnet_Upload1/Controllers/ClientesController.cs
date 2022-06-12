@@ -19,7 +19,10 @@ namespace Aspnet_Upload1.Controllers
             dbContext = context;
             webHostEnvironment = hostEnvironment;
         }
-        //criando a ordenação https://docs.microsoft.com/pt-br/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
+//Criando a ordenação
+//Fonte: https://docs.microsoft.com/pt-br/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
+//sortOrder serve para ordenar alguns itens, já searchString é busca.
+
         public async Task<IActionResult> Index(string sortOrder, string searchString)
 
         {
@@ -29,13 +32,13 @@ namespace Aspnet_Upload1.Controllers
 
             var clientes = from s in dbContext.Clientes
                            select s;
-
+//parte da busca
             if (!String.IsNullOrEmpty(searchString))
             {
                 clientes = clientes.Where(s => s.Nome.Contains(searchString)
                                        || s.Email.Contains(searchString));
             }
-
+//parte da ordenação
             switch (sortOrder)
             {
                 case "nome_desc":
@@ -70,7 +73,9 @@ namespace Aspnet_Upload1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        //importante anexar a foto https://docs.microsoft.com/pt-br/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
+//Como anexar uma foto 
+//fonte: https://docs.microsoft.com/pt-br/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
+
         public async Task<IActionResult> Novo(ClienteViewModel model)
         {
             if (ModelState.IsValid)
