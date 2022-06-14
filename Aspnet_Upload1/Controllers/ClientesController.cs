@@ -74,7 +74,8 @@ namespace Aspnet_Upload1.Controllers
         [ValidateAntiForgeryToken]
 
 //Como anexar uma foto 
-//fonte: https://docs.microsoft.com/pt-br/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
+//fonte: https://www.macoratti.net/20/03/aspc_imguplod1.htm
+//https://www.macoratti.net/20/03/aspc_imguplod2.htm
 
         public async Task<IActionResult> Novo(ClienteViewModel model)
         {
